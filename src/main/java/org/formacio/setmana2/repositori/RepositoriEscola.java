@@ -27,6 +27,15 @@ public class RepositoriEscola {
 		return em.find(Alumne.class, nom);
 	}
 	
-
+	public Matricula apunta (String alumne, String curs) throws EdatIncorrecteException {
+		Alumne alumneCarregat = carregaAlumne(alumne);
+		Curs cursCarregat = carregaCurs(curs);
+		Matricula matriculaCreada = new Matricula();
+		matriculaCreada.setAlumne(alumneCarregat);
+		matriculaCreada.setCurs(cursCarregat);
+		em.persist(matriculaCreada);
+	    return matriculaCreada;	
+	}
+	
 	
 }
