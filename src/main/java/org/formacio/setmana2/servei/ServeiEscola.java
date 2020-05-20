@@ -3,13 +3,12 @@ package org.formacio.setmana2.servei;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.formacio.setmana2.domini.Matricula;
 import org.formacio.setmana2.repositori.EdatIncorrecteException;
 import org.formacio.setmana2.repositori.RepositoriEscola;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ServeiEscola {
@@ -24,7 +23,7 @@ public class ServeiEscola {
 	@Autowired
 	RepositoriEscola repositori;
 	
-	@Transactional
+	@Transactional(rollbackFor= {EdatIncorrecteException.class})
 	public List<Matricula> apunta (String curs, List<String> alumnes) throws EdatIncorrecteException {
 		
 		List<Matricula> matricules = new ArrayList<Matricula>();
